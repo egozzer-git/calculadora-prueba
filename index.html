@@ -1,163 +1,147 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="es">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2685.1">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Riesgo Influenza H3N2-K | Modelo Wells-Riley</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root { --primary: #0073b1; --bg: #f3f2ef; --white: #ffffff; }
+        body { font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: var(--bg); color: #333; line-height: 1.6; padding: 20px; }
+        .container { max-width: 900px; margin: auto; background: var(--white); padding: 40px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        h1 { color: var(--primary); text-align: center; margin-bottom: 10px; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }
+        .input-group { display: flex; flex-direction: column; margin-bottom: 15px; }
+        label { font-weight: 600; margin-bottom: 5px; font-size: 0.9em; }
+        input, select { padding: 10px; border: 1px solid #ddd; border-radius: 6px; font-size: 1em; }
+        button { grid-column: span 2; padding: 15px; background: var(--primary); color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 1.1em; transition: 0.3s; }
+        button:hover { background: #005582; }
+        .results { display: flex; justify-content: space-around; margin-top: 30px; background: #f8f9fa; padding: 20px; border-radius: 8px; border: 1px solid #e0e0e0; }
+        .card { text-align: center; }
+        .card h2 { margin: 0; color: var(--primary); font-size: 2.2em; }
+        .card p { margin: 5px 0 0; font-size: 0.85em; color: #666; text-transform: uppercase; letter-spacing: 1px; }
+        .footer-desc { margin-top: 30px; font-size: 0.85em; color: #555; border-top: 1px solid #eee; pt: 20px; }
+    </style>
 </head>
 <body>
-<p class="p1">&lt;!DOCTYPE html&gt;</p>
-<p class="p1">&lt;html lang="es"&gt;</p>
-<p class="p1">&lt;head&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;Calculadora de Riesgo Influenza H3N2-K | Modelo Wells-Riley&lt;/title&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://cdn.jsdelivr.net/npm/chart.js"&gt;&lt;/script&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>:root { --primary: #0073b1; --bg: #f3f2ef; --white: #ffffff; }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>body { font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: var(--bg); color: #333; line-height: 1.6; padding: 20px; }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.container { max-width: 900px; margin: auto; background: var(--white); padding: 40px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>h1 { color: var(--primary); text-align: center; margin-bottom: 10px; }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.input-group { display: flex; flex-direction: column; margin-bottom: 15px; }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>label { font-weight: 600; margin-bottom: 5px; font-size: 0.9em; }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>input, select { padding: 10px; border: 1px solid #ddd; border-radius: 6px; font-size: 1em; }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>button { grid-column: span 2; padding: 15px; background: var(--primary); color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 1.1em; transition: 0.3s; }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>button:hover { background: #005582; }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.results { display: flex; justify-content: space-around; margin-top: 30px; background: #f8f9fa; padding: 20px; border-radius: 8px; border: 1px solid #e0e0e0; }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.card { text-align: center; }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.card h2 { margin: 0; color: var(--primary); font-size: 2.2em; }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.card p { margin: 5px 0 0; font-size: 0.85em; color: #666; text-transform: uppercase; letter-spacing: 1px; }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.footer-desc { margin-top: 30px; font-size: 0.85em; color: #555; border-top: 1px solid #eee; pt: 20px; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
-<p class="p1">&lt;/head&gt;</p>
-<p class="p1">&lt;body&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;div class="container"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;h1&gt;Análisis Epidemiológico H3N2-K&lt;/h1&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;p style="text-align: center; color: #666;"&gt;Modelo Estocástico de Wells-Riley con Ajuste Climático (Diciembre 2025)&lt;/p&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="grid"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="input-group"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;label&gt;Ciudad / Clima (Ajusta λ)&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;select id="ciudad"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;option value="3.5"&gt;Lima (Muy Húmedo - λ: 3.5)&lt;/option&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;option value="0.4" selected&gt;CDMX / Santiago (Seco - λ: 0.4)&lt;/option&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;option value="0.9"&gt;Bogotá (Templado - λ: 0.9)&lt;/option&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;option value="1.5"&gt;Bs. Aires / Madrid (Húmedo - λ: 1.5)&lt;/option&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/select&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="input-group"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;label&gt;Tiempo de Exposición (Horas)&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;input type="number" id="time" value="2" step="0.5"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="input-group"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;label&gt;Ventilación (Caudal m³/h)&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;input type="number" id="vent" value="450"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="input-group"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;label&gt;Actividad del Infector&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;select id="activity"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;option value="2"&gt;Reposo / Silencio&lt;/option&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;option value="60" selected&gt;Hablando (Maestro/Junta)&lt;/option&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;option value="180"&gt;Gritando / Cantando&lt;/option&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/select&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="input-group"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;label&gt;Tu Mascarilla&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;select id="mask"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;option value="0"&gt;Ninguna&lt;/option&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;option value="0.5"&gt;Quirúrgica (50%)&lt;/option&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;option value="0.95"&gt;N95 / KN95 (95%)&lt;/option&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/select&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="input-group"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;label&gt;Volumen del Cuarto (m³)&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;input type="number" id="vol" value="60"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;button onclick="ejecutarSimulacion()"&gt;SIMULAR 1,000 ESCENARIOS (MONTE CARLO)&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="results"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="card"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;h2 id="avgRisk"&gt;--%&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;p&gt;Riesgo Promedio&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="card"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;h2 id="p95Risk" style="color: #d9534f;"&gt;--%&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;p&gt;Peor Escenario (P95)&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;canvas id="riskChart" width="400" height="150"&gt;&lt;/canvas&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="footer-desc"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;strong&gt;Nota Metodológica:&lt;/strong&gt; Esta calculadora utiliza una distribución Log-Normal para la tasa de generación de quanta ($q$), reflejando la variabilidad de los super-emisores de la variante H3N2-K. El modelo incluye el decaimiento biológico ($\lambda$) según la humedad de la ciudad seleccionada.</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p1">&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;script&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>let chart;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>function ejecutarSimulacion() {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const t = parseFloat(document.getElementById('time').value);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const Q = parseFloat(document.getElementById('vent').value);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const lambda = parseFloat(document.getElementById('ciudad').value);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const V = parseFloat(document.getElementById('vol').value);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const qBase = parseFloat(document.getElementById('activity').value);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const maskEff = parseFloat(document.getElementById('mask').value);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const p = 0.5; // Respiración estándar m3/h</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const riesgos = [];</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>for (let i = 0; i &lt; 1000; i++) {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>// Simulación de variabilidad biológica del quanta q</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const qRand = qBase * Math.exp(0.5 * (Math.random() - 0.5));</p>
-<p class="p1"><span class="Apple-converted-space">            </span>// Fórmula Wells-Riley extendida con decaimiento biológico</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const P = (1 - Math.exp(-(1 * qRand * p * t) / (Q + (lambda * V)))) * (1 - maskEff);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>riesgos.push(P * 100);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>riesgos.sort((a, b) =&gt; a - b);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const avg = riesgos.reduce((a, b) =&gt; a + b) / 1000;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const p95 = riesgos[Math.floor(950)];</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>document.getElementById('avgRisk').innerText = avg.toFixed(1) + "%";</p>
-<p class="p1"><span class="Apple-converted-space">        </span>document.getElementById('p95Risk').innerText = p95.toFixed(1) + "%";</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>dibujarGrafico(riesgos);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>function dibujarGrafico(data) {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const ctx = document.getElementById('riskChart').getContext('2d');</p>
-<p class="p1"><span class="Apple-converted-space">        </span>if (chart) chart.destroy();</p>
-<p class="p2"><span class="Apple-converted-space">        </span></p>
-<p class="p1"><span class="Apple-converted-space">        </span>const bins = new Array(10).fill(0);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>data.forEach(r =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const index = Math.min(Math.floor(r / 10), 9);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>bins[index]++;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>});</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>chart = new Chart(ctx, {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>type: 'bar',</p>
-<p class="p1"><span class="Apple-converted-space">            </span>data: {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>labels: ['0-10%', '11-20%', '21-30%', '31-40%', '41-50%', '51-60%', '61-70%', '71-80%', '81-90%', '91-100%'],</p>
-<p class="p1"><span class="Apple-converted-space">                </span>datasets: [{</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>label: 'Frecuencia de Escenarios (Monte Carlo)',</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>data: bins,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>backgroundColor: '#0073b1'</p>
-<p class="p1"><span class="Apple-converted-space">                </span>}]</p>
-<p class="p1"><span class="Apple-converted-space">            </span>},</p>
-<p class="p1"><span class="Apple-converted-space">            </span>options: { scales: { y: { beginAtZero: true } } }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>});</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1">&lt;/script&gt;</p>
-<p class="p1">&lt;/body&gt;</p>
-<p class="p1">&lt;/html&gt;</p>
+
+<div class="container">
+    <h1>Análisis Epidemiológico H3N2-K</h1>
+    <p style="text-align: center; color: #666;">Modelo Estocástico de Wells-Riley con Ajuste Climático (Diciembre 2025)</p>
+
+    <div class="grid">
+        <div class="input-group">
+            <label>Ciudad / Clima (Ajusta λ)</label>
+            <select id="ciudad">
+                <option value="3.5">Lima (Muy Húmedo - λ: 3.5)</option>
+                <option value="0.4" selected>CDMX / Santiago (Seco - λ: 0.4)</option>
+                <option value="0.9">Bogotá (Templado - λ: 0.9)</option>
+                <option value="1.5">Bs. Aires / Madrid (Húmedo - λ: 1.5)</option>
+            </select>
+        </div>
+        <div class="input-group">
+            <label>Tiempo de Exposición (Horas)</label>
+            <input type="number" id="time" value="2" step="0.5">
+        </div>
+        <div class="input-group">
+            <label>Ventilación (Caudal m³/h)</label>
+            <input type="number" id="vent" value="450">
+        </div>
+        <div class="input-group">
+            <label>Actividad del Infector</label>
+            <select id="activity">
+                <option value="2">Reposo / Silencio</option>
+                <option value="60" selected>Hablando (Maestro/Junta)</option>
+                <option value="180">Gritando / Cantando</option>
+            </select>
+        </div>
+        <div class="input-group">
+            <label>Tu Mascarilla</label>
+            <select id="mask">
+                <option value="0">Ninguna</option>
+                <option value="0.5">Quirúrgica (50%)</option>
+                <option value="0.95">N95 / KN95 (95%)</option>
+            </select>
+        </div>
+        <div class="input-group">
+            <label>Volumen del Cuarto (m³)</label>
+            <input type="number" id="vol" value="60">
+        </div>
+
+        <button onclick="ejecutarSimulacion()">SIMULAR 1,000 ESCENARIOS (MONTE CARLO)</button>
+    </div>
+
+    <div class="results">
+        <div class="card">
+            <h2 id="avgRisk">--%</h2>
+            <p>Riesgo Promedio</p>
+        </div>
+        <div class="card">
+            <h2 id="p95Risk" style="color: #d9534f;">--%</h2>
+            <p>Peor Escenario (P95)</p>
+        </div>
+    </div>
+
+    <canvas id="riskChart" width="400" height="150"></canvas>
+
+    <div class="footer-desc">
+        <strong>Nota Metodológica:</strong> Esta calculadora utiliza una distribución Log-Normal para la tasa de generación de quanta ($q$), reflejando la variabilidad de los super-emisores de la variante H3N2-K. El modelo incluye el decaimiento biológico ($\lambda$) según la humedad de la ciudad seleccionada.
+    </div>
+</div>
+
+<script>
+    let chart;
+    function ejecutarSimulacion() {
+        const t = parseFloat(document.getElementById('time').value);
+        const Q = parseFloat(document.getElementById('vent').value);
+        const lambda = parseFloat(document.getElementById('ciudad').value);
+        const V = parseFloat(document.getElementById('vol').value);
+        const qBase = parseFloat(document.getElementById('activity').value);
+        const maskEff = parseFloat(document.getElementById('mask').value);
+        const p = 0.5; // Respiración estándar m3/h
+        const riesgos = [];
+
+        for (let i = 0; i < 1000; i++) {
+            // Simulación de variabilidad biológica del quanta q
+            const qRand = qBase * Math.exp(0.5 * (Math.random() - 0.5));
+            // Fórmula Wells-Riley extendida con decaimiento biológico
+            const P = (1 - Math.exp(-(1 * qRand * p * t) / (Q + (lambda * V)))) * (1 - maskEff);
+            riesgos.push(P * 100);
+        }
+
+        riesgos.sort((a, b) => a - b);
+        const avg = riesgos.reduce((a, b) => a + b) / 1000;
+        const p95 = riesgos[Math.floor(950)];
+
+        document.getElementById('avgRisk').innerText = avg.toFixed(1) + "%";
+        document.getElementById('p95Risk').innerText = p95.toFixed(1) + "%";
+
+        dibujarGrafico(riesgos);
+    }
+
+    function dibujarGrafico(data) {
+        const ctx = document.getElementById('riskChart').getContext('2d');
+        if (chart) chart.destroy();
+        
+        const bins = new Array(10).fill(0);
+        data.forEach(r => {
+            const index = Math.min(Math.floor(r / 10), 9);
+            bins[index]++;
+        });
+
+        chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['0-10%', '11-20%', '21-30%', '31-40%', '41-50%', '51-60%', '61-70%', '71-80%', '81-90%', '91-100%'],
+                datasets: [{
+                    label: 'Frecuencia de Escenarios (Monte Carlo)',
+                    data: bins,
+                    backgroundColor: '#0073b1'
+                }]
+            },
+            options: { scales: { y: { beginAtZero: true } } }
+        });
+    }
+</script>
 </body>
 </html>
